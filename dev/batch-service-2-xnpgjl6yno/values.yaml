@@ -15,7 +15,7 @@ batch:
   name: batch-service-2-xnpgjl6yno
   image:
     name: batch-service-2-xnpgjl6yno
-    tag: lastest
+    tag: "8142-4702-batch-service-2-xnpgjl6yno-7ae0141"
     secret: regsecret
   container:
     name: batch-service-2-xnpgjl6yno
