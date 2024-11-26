@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ default "none" .Values.pvc.name }}
+  namespace: {{ default "none" .Values.namespace }}
+  annotations:
+    volume.beta.kubernetes.io/storage-class: {{ default "none" .Values.pvc.storageClass }}
+spec:
+  accessModes:
+    - {{ default "ReadWriteMany" .Values.pvc.accessMode }}
+  resources:
+    requests:
+      storage: {{ default "5Gi" .Values.pvc.size }}

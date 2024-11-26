@@ -1,0 +1,25 @@
+namespace: -@namespace@-
+secret:
+  name: []
+  registry:
+    name: regsecret
+    url: -@imageRepoName@-
+    username: -@accessKey@-
+    password: -@secretKey@-
+    email: info@twolinecode.com
+egov_ingress:
+  name: []
+  proxy:
+    bodysize: []
+    rewrite_target: /$2
+  tls:
+    host: -@host@-
+    nrn: 
+    crt: []
+    key: []
+  secret:
+    name: 
+  rule:
+    host: []
+  loadbalancer:
+    address: 
