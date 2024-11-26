@@ -10,27 +10,27 @@ service:
   type:
   - ClusterIP
   - NodePort
-namespace: -@namespace@-
+namespace: wwww-dev
 batch:
   name: batch-service-1-pg4rb3b6op
   image:
     name: batch-service-1-pg4rb3b6op
     tag: lastest
-    secret: -@repoSecret@-
+    secret: regsecret
   container:
     name: batch-service-1-pg4rb3b6op
   repo:
-    url: -@imageRepoName@-
+    url: turaco-dev-registry.turacocloud.com/dev-turaco-workspace-268/turaco
   backing: 
   volume:
     name: pvc-batch-service-1-pg4rb3b6op
   resource:
     request:
-      memory: -@requestMemory@-
-      cpu: -@requestCpu@-
+      memory: 250Mi
+      cpu: 0.25
     limits:
-      memory: -@limitsMemory@-
-      cpu: -@limitsCpu@-
+      memory: 0Mi
+      cpu: 0
 pvc:
   name: pvc-batch-service-1-pg4rb3b6op
   storageClass: tlc-block-sc
