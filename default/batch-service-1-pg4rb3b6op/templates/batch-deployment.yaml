@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.batch.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.batch.name }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.batch.name }}
+        app.kubernetes.io/name: {{ .Values.batch.name }}
+        app.kubernetes.io/instance: {{ .Values.batch.name }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: {{ .Values.batch.container.name }}
+          image: {{ .Values.batch.repo.url }}:{{ .Values.batch.image.tag }}
+          imagePullPolicy: Always
+          env:
+
+          envFrom:
+          resources:
+            requests:
+              memory: "{{ default "64Mi" .Values.batch.resource.request.memory }}"
+              cpu: "{{ default "100m" .Values.batch.resource.request.cpu }}"
+            {{- if and (ne .Values.batch.resource.limits.memory "0Mi") (ne .Values.batch.resource.limits.memory "0Gi") }}
+            limits:
+              memory: "{{ default "64Mi" .Values.batch.resource.limits.memory }}"
+              cpu: "{{ default "100m" .Values.batch.resource.limits.cpu }}"
+            {{- end }}
+          volumeMounts:
+            - name: {{ .Values.batch.volume.name }}
+              mountPath: /logs
+
+      volumes:
+        - name: {{ .Values.batch.volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.pvc.name }}
+
+      imagePullSecrets:
+        - name: {{ .Values.batch.image.secret }}

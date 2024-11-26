@@ -1,0 +1,38 @@
+service:
+  port:
+    name: http
+    l4_protocol: TCP
+    port: 8080
+    targetPort: 8080
+  label: batch-service-2-xnpgjl6yno
+  name: batch-service-2-xnpgjl6yno
+  selector: batch-service-2-xnpgjl6yno
+  type:
+  - ClusterIP
+  - NodePort
+namespace: -@namespace@-
+batch:
+  name: batch-service-2-xnpgjl6yno
+  image:
+    name: batch-service-2-xnpgjl6yno
+    tag: lastest
+    secret: -@repoSecret@-
+  container:
+    name: batch-service-2-xnpgjl6yno
+  repo:
+    url: -@imageRepoName@-
+  backing: 
+  volume:
+    name: pvc-batch-service-2-xnpgjl6yno
+  resource:
+    request:
+      memory: -@requestMemory@-
+      cpu: -@requestCpu@-
+    limits:
+      memory: -@limitsMemory@-
+      cpu: -@limitsCpu@-
+pvc:
+  name: pvc-batch-service-2-xnpgjl6yno
+  storageClass: tlc-block-sc
+  size: 5Gi
+  accessMode: ReadWriteOnce
