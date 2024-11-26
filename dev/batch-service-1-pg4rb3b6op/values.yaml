@@ -15,7 +15,7 @@ batch:
   name: batch-service-1-pg4rb3b6op
   image:
     name: batch-service-1-pg4rb3b6op
-    tag: lastest
+    tag: "8142-4702-batch-service-1-pg4rb3b6op-1f9ca21"
     secret: regsecret
   container:
     name: batch-service-1-pg4rb3b6op
